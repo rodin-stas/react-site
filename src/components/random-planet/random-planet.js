@@ -17,23 +17,23 @@ export default class RandomPlanet extends Component {
 		error: false
 	}
 
-	constructor() {
-		super();
+	componentDidMount() {
 		this.updatePlanet()
-	}
+		setInterval(this.updatePlanet,2500)	}
 
 	onPlanetLoaded = (planet) => {
 		this.setState({planet, loading: false},
 		)
 	}
-	onError = (err) => {
+	onError = () => {
 		this.setState({
 			error: true,
 			loading: false
 		})
 	}
 
-	updatePlanet() {
+	updatePlanet=()=> {
+		console.log('Update Planet')
 		const id = Math.floor(Math.random() * 20) + 2
 		this.swapiSrevise
 			.getPlanet(id)
