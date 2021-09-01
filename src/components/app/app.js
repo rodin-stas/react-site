@@ -10,11 +10,12 @@ import './app.css';
 export default class App extends React.Component {
 
 	state = {
-		selectedPerson: null
+		selectedPerson:3
 	}
 
 	onPersonSelected = (id) => {
 		this.setState({selectedPerson: id})
+		console.log(id)
 	}
 
 	render() {
