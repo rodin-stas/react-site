@@ -8,6 +8,7 @@ import './random-planet.css';
 import ErroIndicator from "../error-indicator";
 
 export default class RandomPlanet extends Component {
+	_isMounted = false;
 
 	swapiSrevise = new SwapiServise();
 
@@ -18,8 +19,15 @@ export default class RandomPlanet extends Component {
 	}
 
 	componentDidMount() {
+		this._isMounted = true;
 		this.updatePlanet()
-		setInterval(this.updatePlanet,2500)	}
+		this.intetval = setInterval(this.updatePlanet, 2500)
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
+		clearInterval(this.intetval)
+	}
 
 	onPlanetLoaded = (planet) => {
 		this.setState({planet, loading: false},
@@ -32,7 +40,7 @@ export default class RandomPlanet extends Component {
 		})
 	}
 
-	updatePlanet=()=> {
+	updatePlanet = () => {
 		console.log('Update Planet')
 		const id = Math.floor(Math.random() * 20) + 2
 		this.swapiSrevise
